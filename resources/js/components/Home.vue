@@ -65,7 +65,7 @@ export default {
   computed: {
     fiteredPost: function() {
       return this.posts.filter(post => {
-        return post.description.match(this.search);
+        return post.title.match(this.search);
       });
     }
   },
