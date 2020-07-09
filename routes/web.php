@@ -24,6 +24,6 @@ Route::group(['prefix' => 'admin-dashboard-styanveshi'], function(){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::any('{query}',
-    function() { return redirect('/'); })
-    ->where('query', '.*');
+// Route::any('{query}',
+//     function() { return redirect('/'); })
+//     ->where('query', '.*');

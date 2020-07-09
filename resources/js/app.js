@@ -15,9 +15,11 @@ Vue.use(VueHighlightJS);
 import MainApp from "./components/MainApp.vue";
 
 new Vue({
-    el: "#app",
-    components: {
-        MainApp
-    },
-    router
+  el: "#app",
+  components: {
+    MainApp,
+  },
+  router,
 });
+
+router.replace("/");

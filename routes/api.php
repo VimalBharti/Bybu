@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('all-post', 'PostController@allPost');
+Route::get('all-post/{id}', 'PostController@singlePost');
 Route::post('/join', 'PostController@submit');

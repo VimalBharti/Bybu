@@ -42,6 +42,12 @@ class PostController extends Controller
         return response()->json($posts, 200);
     }
 
+    public function singlePost($id)
+    {
+        $post = Post::find($id);
+        return response()->json($post, 200);
+    }
+
     public function submit(Request $request) {
         $this->validate($request, [
             'instagram' => 'string',

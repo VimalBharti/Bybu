@@ -23,9 +23,49 @@
     <div class="resource-container card-wrapper">
       <div class="card card-details" v-for="(post, index) in fiteredPost" :key="index">
         <div :style="`color: ${post.title_color}`">{{ post.title }}</div>
+        <!-- Dialog Modal -->
+        <div class="dialog-box" v-show="dialogBox">
+          <div class="modal" id="modal">
+            <div class="modal-inner">
+              <div class="modal__photo">
+                <img :src="`uploads/design/${post.image}`" />
+              </div>
+              <div class="modal__text">
+                <div class="text-box">
+                  <div class="actions">
+                    <h2>Markup</h2>
+                    <button
+                      type="button"
+                      v-clipboard:copy="post.markup"
+                      v-clipboard:success="onCopy"
+                      v-clipboard:error="onError"
+                      :class="{ active: isActive }"
+                    >{{ markupButtonText }}</button>
+                  </div>
+                  <pre v-highlightjs="post.markup"><code class="html"></code></pre>
+                </div>
+                <div class="text-box">
+                  <div class="actions">
+                    <h2>CSS</h2>
+                    <button
+                      type="button"
+                      v-clipboard:copy="post.css"
+                      v-clipboard:success="onCopyCss"
+                      v-clipboard:error="onError"
+                      :class="{ active: isActiveCss }"
+                    >{{ cssButtonText }}</button>
+                  </div>
+                  <pre v-highlightjs="post.css"><code class="css"></code></pre>
+                </div>
+              </div>
+              <a @click="closeDetails()" class="modal__close">X</a>
+            </div>
+          </div>
+        </div>
+        <!-- Dialog Modal Ends -->
         <div
           class="image"
-          @click="showDetails(post.id)"
+          @click="showDetails(post)"
           :style="
                         `backgroundImage:url('uploads/design/${post.image}')`
                     "
@@ -54,12 +94,12 @@ export default {
     return {
       dialogBox: false,
       titleColor: "",
-      posts: [],
-      search: "",
       markupButtonText: "Copy",
       cssButtonText: "Copy",
       isActive: false,
-      isActiveCss: false
+      isActiveCss: false,
+      posts: [],
+      search: ""
     };
   },
   computed: {
@@ -85,8 +125,8 @@ export default {
           console.log(err);
         });
     },
-    showDetails(id) {
-      this.$router.push("/post/" + id);
+    showDetails() {
+      this.dialogBox = true;
     },
     closeDetails() {
       this.dialogBox = false;
@@ -113,6 +153,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+button {
+  border: 1px solid #bcc8d0;
+  color: #6b747a;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #fff;
+}
+button.active {
+  border: 1px solid #d34c64;
+  color: #fff;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: #d34c64;
+}
 .flex {
   display: flex;
   justify-content: space-between;
@@ -152,10 +209,10 @@ export default {
   }
   .image {
     margin-bottom: 1em;
-    margin-top: 1em;
+    margin-top: 2em;
     cursor: pointer;
     background-size: cover;
-    height: 280px;
+    height: 200px;
     background-position: center;
   }
   .title {
