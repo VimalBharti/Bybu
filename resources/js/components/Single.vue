@@ -1,7 +1,6 @@
 <template>
   <div class="single-post">
-    <div class="image-preview">
-      <img :src="`/uploads/design/${post.image}`" />
+    <div class="image-preview" :style="{ backgroundImage: `url('/uploads/design/${post.image}')` }">
       <router-link to="/" exact>
         <span class="fas fa-long-arrow-alt-left"></span>
       </router-link>
@@ -94,6 +93,10 @@ export default {
 }
 .image-preview {
   width: 60%;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   position: relative;
   img {
     width: 100%;
