@@ -34,6 +34,7 @@
                     <a class="navbar-item" href="{{url('/home')}}">
                         Join Us List
                     </a>
+                    <a href="{{route('allPost')}}" class="navbar-item">all-Post</a>
                 </div>
 
                 <div class="navbar-end">

@@ -20,10 +20,13 @@ Route::group(['prefix' => 'admin-dashboard-styanveshi'], function(){
     Auth::routes();
     Route::get('new', 'HomeController@newPost')->name('new-post');
     Route::post('new', 'PostController@create')->name('save-post');
+    Route::get('edit-post', 'HomeController@allPost')->name('allPost');
+    Route::get('edit/{id}', 'HomeController@singlePost')->name('singlePost');
+    Route::post('edit/{id}', 'HomeController@edit')->name('editPost');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::any('{query}',
-//     function() { return redirect('/'); })
-//     ->where('query', '.*');
+Route::any('{query}',
+    function() { return redirect('/'); })
+    ->where('query', '.*');
